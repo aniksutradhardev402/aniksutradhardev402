@@ -1,0 +1,24 @@
+name: Update Profile README
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Runs every 6 hours
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    name: Update latest repositories
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Update README
+        uses: gayanvoice/github-profile-activity-generator@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Customize below
+          ACTIVITY: repositories
+          REPOSITORIES_SORT_BY: created
+          REPOSITORIES_LIMIT: 5
+          REPOSITORIES_IGNORE: ''
+          COMMIT_MESSAGE: 'Updated profile with latest repositories'
