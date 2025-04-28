@@ -21,21 +21,23 @@ jobs:
 
       - name: Update README.md
         run: |
-          # Read the content of latest_repos.md and escape newlines and special characters for sed
           repos_content=$(cat latest_repos.md)
           repos_content_escaped=$(echo "$repos_content" | sed ':a;N;$!ba;s/\n/\\n/g')
-
-          # Update README.md by replacing the section with the content
           sed -i "/<!--START_SECTION:repositories-->/, /<!--END_SECTION:repositories-->/c\<!--START_SECTION:repositories-->\n$repos_content_escaped\n<!--END_SECTION:repositories-->" README.md
+
+      - name: Debugging - Check Authentication
+        run: |
+          echo "Testing GitHub token authentication..."
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          echo "Current remote URL: $(git remote -v)"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/aniksutradhardev402/aniksutradhardev402.git
+          echo "Updated remote URL: $(git remote -v)"
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/aniksutradhardev402/aniksutradhardev402.git
-
           git add README.md
           git commit -m "Update latest repositories 🚀" || echo "No changes to commit"
           git push
         env:
-           GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Use the token stored in GitHub secrets
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
