@@ -1,24 +1,32 @@
-name: Update Profile README
+name: Update README with latest repositories
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Runs every 6 hours
-  workflow_dispatch:
+    - cron: '0 */6 * * *'   # Run every 6 hours
+  workflow_dispatch:        # Allow manual run
 
 jobs:
   update-readme:
-    name: Update latest repositories
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Update README
-        uses: actions-js/profile-readme@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Customize below
-          ACTIVITY: repositories
-          REPOSITORIES_SORT_BY: created
-          REPOSITORIES_LIMIT: 5
-          REPOSITORIES_IGNORE: ''
-          COMMIT_MESSAGE: 'Updated profile with latest repositories'
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch latest repositories
+        run: |
+          echo "## 🚀 Latest Repositories" > latest_repos.md
+          echo "" >> latest_repos.md
+          curl -s "https://api.github.com/users/aniksutradhardev402/repos?sort=created&direction=desc" | \
+          jq -r '.[] | "- [\(.name)](\(.html_url))"' | head -n 5 >> latest_repos.md
+
+      - name: Update README.md
+        run: |
+          sed -i '/<!--START_SECTION:repositories-->/, /<!--END_SECTION:repositories-->/c\<!--START_SECTION:repositories-->\n'$(cat latest_repos.md)'\n<!--END_SECTION:repositories-->' README.md
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Update latest repositories 🚀" || echo "No changes to commit"
+          git push
