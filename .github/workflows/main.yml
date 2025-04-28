@@ -21,10 +21,12 @@ jobs:
 
       - name: Update README.md
         run: |
-          # Ensure that the content of the latest repositories file is read correctly with newline
+          # Read the content of latest_repos.md and escape newlines and special characters for sed
           repos_content=$(cat latest_repos.md)
-          # Use sed with newline properly in the replacement text
-          sed -i "/<!--START_SECTION:repositories-->/, /<!--END_SECTION:repositories-->/c\<!--START_SECTION:repositories-->\n$repos_content\n<!--END_SECTION:repositories-->" README.md
+          repos_content_escaped=$(echo "$repos_content" | sed ':a;N;$!ba;s/\n/\\n/g')
+
+          # Update README.md by replacing the section with the content
+          sed -i "/<!--START_SECTION:repositories-->/, /<!--END_SECTION:repositories-->/c\<!--START_SECTION:repositories-->\n$repos_content_escaped\n<!--END_SECTION:repositories-->" README.md
 
       - name: Commit and push changes
         run: |
