@@ -21,7 +21,10 @@ jobs:
 
       - name: Update README.md
         run: |
-          sed -i '/<!--START_SECTION:repositories-->/, /<!--END_SECTION:repositories-->/c\<!--START_SECTION:repositories-->\n'$(cat latest_repos.md)'\n<!--END_SECTION:repositories-->' README.md
+          # Ensure that the content of the latest repositories file is read correctly with newline
+          repos_content=$(cat latest_repos.md)
+          # Use sed with newline properly in the replacement text
+          sed -i "/<!--START_SECTION:repositories-->/, /<!--END_SECTION:repositories-->/c\<!--START_SECTION:repositories-->\n$repos_content\n<!--END_SECTION:repositories-->" README.md
 
       - name: Commit and push changes
         run: |
