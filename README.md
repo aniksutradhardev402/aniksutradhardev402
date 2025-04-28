@@ -1,6 +1,10 @@
 # 💫 About Me:
 I'm a professional Googler, part-time bug whisperer, <br>and full-time "let-me-find-out-how-things-work" enthusiast. <br>I write code that sometimes works, and when it doesn't... well, that's <br>what version control is for, right?<br>....<br><br>C++, Python, Go, Rust, JavaScript (all at the same time — because why not?)<br>Planning to pursue my masters.<br><br>
 
+## 🚀 Latest Repositories
+<!--START_SECTION:repositories-->
+
+<!--END_SECTION:repositories-->
 
 ## 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/https://www.linkedin.com/in/anik-sutradhar/) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:aniksutradhar1official@gmail.com) 
