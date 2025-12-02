@@ -1,5 +1,5 @@
 # 💫 About Me:
-I'm a professional Googler, part-time bug whisperer, <br>and full-time "let-me-find-out-how-things-work" enthusiast. <br>I write code that sometimes works, and when it doesn't... well, that's <br>what version control is for, right?<br>....<br><br>C++, Python, Go, Rust, JavaScript (all at the same time — because why not?)<br>Planning to pursue my masters.<br><br>
+I'm a professional Googler <br>and full-time "let-me-find-out-how-things-work" enthusiast. <br>I write code that sometimes works, and when it doesn't... well, that's <br>what version control is for, right?<br>....<br><br>C++, Python, Go, Rust, JavaScript (all at the same time — because why not?)<br>Planning to pursue my masters.<br><br>
 
 ## 🚀 Latest Repositories
 <!--START_SECTION:repositories-->
