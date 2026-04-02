@@ -18,14 +18,8 @@ jobs:
           user: aniksutradhardev402
           template: classic
          
-          base: repositories, metadata
-          config_timezone: Asia/Kolkata
-          
-          # --- Repositories (Current & Previous) ---
-          plugin_repositories: yes
-          plugin_repositories_pinned: 3        
-          plugin_repositories_featured:   
-          plugin_forks: yes                    
+          base: header,repositories, metadata
+          config_timezone: Asia/Kolkata                   
           
           # --- Recent Activity ---
           plugin_activity: yes
